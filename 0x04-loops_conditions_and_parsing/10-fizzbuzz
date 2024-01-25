@@ -15,5 +15,5 @@ do
     else
         echo $num
     fi
-    $((num++))
+    ((num++))
 done
