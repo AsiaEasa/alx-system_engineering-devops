@@ -3,15 +3,15 @@
 num=1
 while [ $num -lt 101 ]
 do
-    if [ $((num%3)) -eq 0 ]
+    elif [ $((num%5)) -eq 0 ] && [ $((num%3)) -eq 0]
     then
-        echo "Fizz"
+        echo "FizzBuzz"
     elif [ $((num%5)) -eq 0 ]
     then
         echo "Buzz"
-    elif [ $((num%5)) -eq 0 ] && [ $((num%3)) -eq 0 ]
+    elif [ $((num%3)) -eq 0 ]
     then
-        echo "FizzBuzz"
+        echo "Fizz"
     else
         echo $num
     fi
