@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#The script is content loops from 1 to 10 and displays different strings throughout specific iterations
+#4 bad luck, 8 is your chance
 x=1
 
 while [ "$x" -le 11 ]
