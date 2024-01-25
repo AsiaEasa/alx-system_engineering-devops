@@ -3,7 +3,7 @@
 num=1
 while [ $num -lt 101 ]
 do
-    elif [ $((num%5)) -eq 0 ] && [ $((num%3)) -eq 0]
+    if [ $((num%5)) -eq 0 ] && [ $((num%3)) -eq 0 ]
     then
         echo "FizzBuzz"
     elif [ $((num%5)) -eq 0 ]
