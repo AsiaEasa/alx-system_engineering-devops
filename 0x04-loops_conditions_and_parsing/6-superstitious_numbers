@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#The script that displays numbers from 1 to 20
+# The script that displays numbers from 1 to 20
 x=1
 
 while [ $x -lt 21 ]
