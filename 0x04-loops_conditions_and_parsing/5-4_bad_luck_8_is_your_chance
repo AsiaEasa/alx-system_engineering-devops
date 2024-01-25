@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #4 bad luck, 8 is your chance
 x=1
-
 while [ "$x" -le 11 ]
 do
     if [ "$x" -eq 4 ]
