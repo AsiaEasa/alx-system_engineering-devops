@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#4 bad luck, 8 is your chance
+#4 bad luck, 8 good luck
 count=1
 while [ $count -le 10 ]
 do
@@ -12,5 +12,5 @@ do
     else
         echo "Best School"
     fi
-    count=$((count+1))
+    ((count++))
 done
