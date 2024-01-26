@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 #The script list your processes
-echo "ps auxf"
+x=$(ps auxf)
+echo "$x"
