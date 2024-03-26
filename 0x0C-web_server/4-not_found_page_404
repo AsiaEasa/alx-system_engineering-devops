@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Bash script to set up nginx server and configure redirection and custom error page
+
+
+sudo apt-get update
+
+
+sudo apt-get install -y nginx
+
+
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Add redirection rule to nginx configuration
+sudo sed -i '38i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+# Create custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/error_404.html > /dev/null
+
+# Configure nginx to use custom error page for 404 errors
+sudo sed -i '39i\error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+
+# Start nginx service
+sudo service nginx start
