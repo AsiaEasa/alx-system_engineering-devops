@@ -1,4 +1,9 @@
 # 2-puppet_custom_http_response_header.pp
+# task2
+
+exec { 'update system':
+        command => '/usr/bin/apt-get update',
+}
 
 # Install Nginx package
 package { 'nginx':
