@@ -1,0 +1,5 @@
+#!/bin/bash
+#the same thing in task 0
+sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx start
