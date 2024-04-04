@@ -5,11 +5,11 @@ find_ip() {
     local domain="$1"
     local subdomain="$2"
     
-    local ans=$(dig +short "$subdomain.$domain")
-    local record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/{getline; print $4}')
+    local A=$(dig +short "$subdomain.$domain")
+    local R=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/{getline; print $4}')
     
-    if [ -n "$ans" ]; then
-        echo "The subdomain $subdomain is a $record_type record and points to $ans"
+    if [ -n "$A" ]; then
+        echo "The subdomain $subdomain is a $R record and points to $A"
     fi
 }
 
