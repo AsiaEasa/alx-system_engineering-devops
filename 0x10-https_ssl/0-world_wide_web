@@ -1,29 +1,41 @@
 #!/usr/bin/env bash
 # Gives info about my domain & subdomain
 
-get_subdomain_info() {
+find_ip() {
     local domain="$1"
     local subdomain="$2"
     
-    local record=$(dig +short "$subdomain.$domain" | head -1)
-    local record_type=$(dig +short "$subdomain.$domain" | awk 'NR==1{print toupper($4)}')
+    local ans=$(dig +short "$subdomain.$domain")
+    local record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION/{getline; print $4}')
     
-    if [ -n "$record" ]; then
-        echo "The subdomain $subdomain is a $record_type record and points to $record"
+    if [ -n "$ans" ]; then
+        echo "The subdomain $subdomain is a $record_type record and points to $ans"
+    else
+        echo "No information found for subdomain $subdomain"
     fi
 }
 
+# Main function
 main() {
     local domain="$1"
+    
+    # Default subdomains
+    subdomains=("www" "lb-01" "web-01" "web-02")
 
-    get_subdomain_info "$domain" "www"
-    get_subdomain_info "$domain" "lb-01"
-    get_subdomain_info "$domain" "web-01"
-    get_subdomain_info "$domain" "web-02"
+    # If subdomain provided, use only that
+    if [ "$#" -eq 2 ]; then
+        find_ip "$domain" "$2"
+    else
+        for subdomain in "${subdomains[@]}"; do
+            find_ip "$domain" "$subdomain"
+        done
+    fi
 }
 
-if [ "$#" -eq 1 ]; then
-    main "$1"
-elif [ "$#" -eq 2 ]; then
-    get_subdomain_info "$1" "$2"
+# Check arguments and call main function
+if [ "$#" -eq 1 ] || [ "$#" -eq 2 ]; then
+    main "$@"
+else
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
 fi
