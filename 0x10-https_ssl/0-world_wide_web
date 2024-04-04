@@ -10,12 +10,9 @@ find_ip() {
     
     if [ -n "$ans" ]; then
         echo "The subdomain $subdomain is a $record_type record and points to $ans"
-    else
-        echo "No information found for subdomain $subdomain"
     fi
 }
 
-# Main function
 main() {
     local domain="$1"
     
@@ -35,7 +32,4 @@ main() {
 # Check arguments and call main function
 if [ "$#" -eq 1 ] || [ "$#" -eq 2 ]; then
     main "$@"
-else
-    echo "Usage: $0 <domain> [subdomain]"
-    exit 1
 fi
