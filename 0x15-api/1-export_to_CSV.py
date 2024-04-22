@@ -11,30 +11,15 @@ import sys
 def get_employee_tasks(employee_id):
     URL = "https://jsonplaceholder.typicode.com/"
     user = requests.get(URL + "users/{}".format(employee_id)).json()
-
     PARAMS = {"userId": employee_id}
     todos = requests.get(URL + "todos", PARAMS).json()
-
-    tasks = []
-    for todo in todos:
-        task_completed = "True" if todo["completed"] else "False"
-        tasks.append([user["id"], user["name"], task_completed, todo["title"]])
-
+    tasks = [[employee_id, user["username"], "True" if todo["completed"] else "False", todo["title"]] for todo in todos]
     return tasks
 
-
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        employee_id = sys.argv[1]
-    else:
-        employee_id = input("Enter employee ID: ")
-
+    employee_id = sys.argv[1] if len(sys.argv) > 1 else input("Enter employee ID: ")
     tasks = get_employee_tasks(employee_id)
-
-    filename = "{}.csv".format(employee_id)
-    with open(filename, "w", newline="") as csvfile:
-        csv_writer = csv.writer(csvfile)
+    with open("{}.csv".format(employee_id), "w", newline="") as csvfile:
+        csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         csv_writer.writerows(tasks)
-
-    print("Data exported to", filename)
