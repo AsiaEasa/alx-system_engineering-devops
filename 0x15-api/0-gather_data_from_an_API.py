@@ -24,11 +24,10 @@ if __name__ == "__main__":
         employee_id = sys.argv[1]
     else:
         employee_id = input("Enter employee ID: ")
-
-    name, completed_tasks, total_tasks, completed = get_employee_tasks(employee_id)
+    name, completed_tasks, total_tasks, completed = \
+        get_employee_tasks(employee_id)
 
     print("Employee {} is done with tasks({}/{}):".format(
         name, completed_tasks, total_tasks))
 
-    for task in completed:
-        print("\t{}".format(task))
+    [print("\t {}".format(task)) for task in completed]
