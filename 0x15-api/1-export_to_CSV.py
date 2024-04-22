@@ -23,6 +23,7 @@ def fetch_user_todo_list(user_id):
             [user_id, username, t.get("completed"), t.get("title")]
         ) for t in todos]
 
+
 if __name__ == "__main__":
     user_id = sys.argv[1]
     fetch_user_todo_list(user_id)
