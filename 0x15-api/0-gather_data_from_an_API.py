@@ -3,39 +3,32 @@
 a python script that using this REST API, for a given employee ID,
 returns information about his/her TODO list progress.
 """
-
 import requests
-from sys import argv
+import sys
 
-def get_user_completed_tasks(user_id):
-    base_url = "https://jsonplaceholder.typicode.com/"
-    
-    user_request = requests.get("{}users/{}".format(base_url, user_id))
-    user_info = user_request.json()
-    user_name = user_info.get("name")
-    
-    if user_name is not None:
-        todos_request = requests.get("{}todos?userId={}".format(base_url, user_id))
-        todos_info = todos_request.json()
-        
-        all_tasks = len(todos_info)
-        completed_tasks = [task for task in todos_info if task.get("completed")]
-        completed_count = len(completed_tasks)
-        
-        return user_name, completed_count, all_tasks, completed_tasks
-    else:
-        return None
+def get_employee_tasks(employee_id):
+    # Base URL for the JSONPlaceholder API
+    url = "https://jsonplaceholder.typicode.com/"
+
+    # Get the employee information using the provided employee ID
+    user = requests.get(url + "users/{}".format(employee_id)).json()
+
+    # Get the to-do list for the employee using the provided employee ID
+    params = {"userId": employee_id}
+    todos = requests.get(url + "todos", params).json()
+
+    # Filter completed tasks and count them
+    completed = [t.get("title") for t in todos if t.get("completed") is True]
+
+    # Return the employee's name and the number of completed tasks
+    return user.get("name"), len(completed), len(todos), completed
 
 if __name__ == "__main__":
-    if len(argv) > 1:
-        user_id = argv[1]
-        user_info = get_user_completed_tasks(user_id)
-        
-        if user_info:
-            user_name, completed_count, all_tasks, completed_tasks = user_info
-            print("Employee {} is done with tasks({}/{}):".format(user_name, completed_count, all_tasks))
-            
-            for idx, completed_task in enumerate(completed_tasks, 1):
-                print("Task {} Formatting: {}".format(idx, "OK" if completed_task.get("title") else "0K"))
-        else:
-            print("User not found.")
+    employee_id = sys.argv[1] if len(sys.argv) > 1 else input("Enter employee ID: ")
+    name, completed_tasks, total_tasks, completed = get_employee_tasks(employee_id)
+
+    # Print the employee's name and the number of completed tasks
+    print("Employee {} is done with tasks({}/{}):".format(name, completed_tasks, total_tasks))
+
+    # Print the completed tasks one by one with indentation
+    [print("\t{}".format(task)) for task in completed]
