@@ -14,15 +14,17 @@ def fetch_user_todo_list(user_id):
 
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    # Prepare JSON data
     json_data = {
         user_id: [
-            {"task": t.get("title"), "completed": t.get("completed"), "username": username}
+            {
+                "task": t.get("title"),
+                "completed": t.get("completed"),
+                "username": username
+            }
             for t in todos
         ]
     }
 
-    # Write JSON data to file
     with open("{}.json".format(user_id), "w") as jsonfile:
         json.dump(json_data, jsonfile, indent=4)
 
