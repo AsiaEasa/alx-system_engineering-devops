@@ -18,7 +18,11 @@ def fetch_all_todo_lists():
         USERNAME = USER["username"]
         TODOS = requests.get(URL + "todos", params={"userId": USER_ID}).json()
         USER_TASKS = [
-            {"username": USERNAME, "task": t.get("title"), "completed": t.get("completed")}
+            {
+                "username": USERNAME,
+                "task": t.get("title"),
+                "completed": t.get("completed")
+            }
             for t in TODOS
         ]
         ALL_TASKS[USER_ID] = USER_TASKS
