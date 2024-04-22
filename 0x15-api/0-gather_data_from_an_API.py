@@ -18,7 +18,7 @@ def fetch_todo_progress(employee_id):
         completed_tasks = [todo['title'] for todo in todos if todo['completed']]
         total_tasks = len(todos)
         num_completed_tasks = len(completed_tasks)
-        employee_name = todos[0]['username']  # Assuming username corresponds to employee name
+        employee_name = todos[0]['name']  # Use 'name' field for employee name
         
         print(f"Employee {employee_name} is done with tasks({num_completed_tasks}/{total_tasks}):")
         for task in completed_tasks:
