@@ -6,29 +6,29 @@ import requests
 import sys
 
 
-def fetch_user_todo_list(user_id):
-    url = "https://jsonplaceholder.typicode.com/"
+def fetch_user_todo_list(USER_ID):
+    URL = "https://jsonplaceholder.typicode.com/"
 
-    user = requests.get(url + "users/{}".format(user_id)).json()
-    username = user.get("username")
+    USER = requests.get(URL + "users/{}".format(USER_ID)).json()
+    USERNAME = USER.get("username")
 
-    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+    TODOS = requests.get(URL + "todos", params={"userId": USER_ID}).json()
 
-    json_data = {
-        user_id: [
+    JSON_DATA = {
+        USER_ID: [
             {
                 "task": t.get("title"),
                 "completed": t.get("completed"),
-                "username": username
+                "username": USERNAME
             }
-            for t in todos
+            for t in TODOS
         ]
     }
 
-    with open("{}.json".format(user_id), "w") as jsonfile:
-        json.dump(json_data, jsonfile, indent=4)
+    with open("{}.json".format(USER_ID), "w") as JSONFILE:
+        json.dump(JSON_DATA, JSONFILE, indent=4)
 
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    fetch_user_todo_list(user_id)
+    USER_ID = sys.argv[1]
+    fetch_user_todo_list(USER_ID)
