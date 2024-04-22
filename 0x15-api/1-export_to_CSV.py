@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-a python script that using this REST API, for a given employee ID,
+A Python script that uses this REST API, for a given employee ID,
 returns information about his/her TODO list progress.
 """
 import csv
@@ -8,22 +8,22 @@ import requests
 import sys
 
 
-def fetch_user_todo_list(user_id):
-    url = "https://jsonplaceholder.typicode.com/"
+def fetch_user_todo_list(USER_ID):
+    URL = "https://jsonplaceholder.typicode.com/"
 
-    user = requests.get(url + "users/{}".format(user_id)).json()
+    USER = requests.get(URL + "users/{}".format(USER_ID)).json()
 
-    username = user.get("username")
+    USERNAME = USER.get("username")
 
-    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+    TODOS = requests.get(URL + "todos", params={"userId": USER_ID}).json()
 
-    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
-        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        [writer.writerow(
-            [user_id, username, t.get("completed"), t.get("title")]
-        ) for t in todos]
+    with open("{}.csv".format(USER_ID), "w", newline="") as CSVFILE:
+        WRITER = csv.writer(CSVFILE, quoting=csv.QUOTE_ALL)
+        [WRITER.writerow(
+            [USER_ID, USERNAME, t.get("completed"), t.get("title")]
+        ) for t in TODOS]
 
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    fetch_user_todo_list(user_id)
+    USER_ID = sys.argv[1]
+    fetch_user_todo_list(USER_ID)
