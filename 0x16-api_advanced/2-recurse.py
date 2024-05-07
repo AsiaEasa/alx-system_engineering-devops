@@ -5,11 +5,11 @@ import requests
 
 def recurse(subreddit, hot_list=[], after=None):
     """queries the Reddit API"""
-    URL = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
-    HEAD = {'User-Agent': 'Hi/0.'}
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
+    headers = {'User-Agent': 'Hi/0.'}
     params = {'after': after} if after else {}
 
-    r = requests.get(URL, headers=HEAD, params=params)
+    r = requests.get(url, headers=headers, params=params)
     if r.status_code == 200:
         data = r.json()
         posts = data['data']['children']
