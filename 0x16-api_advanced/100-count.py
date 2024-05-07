@@ -8,15 +8,15 @@ def count_words(subreddit, word_list, after=None, counts=None):
     if counts is None:
         counts = {}
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
-    headers = {'User-Agent': 'Hi/0.0'}
-    params = {'after': after} if after else {}
+    URL = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
+    HEADERS = {'User-Agent': 'Hi/0.0'}
+    PARAMS = {'after': after} if after else {}
 
-    response = requests.get(url, headers=headers, params=params)
-    if response.status_code == 200:
-        data = response.json()
-        posts = data['data']['children']
-        for post in posts:
+    RESPONSE = requests.get(URL, headers=HEADERS, params=PARAMS)
+    if RESPONSE.status_code == 200:
+        DATA = RESPONSE.json()
+        POSTS = DATA['data']['children']
+        for post in POSTS:
             title = post['data']['title'].lower()
             for word in word_list:
                 if word.lower() in title:
@@ -24,7 +24,7 @@ def count_words(subreddit, word_list, after=None, counts=None):
                     Y = title.count(word.lower())
                     counts[X] = counts.get(X, 0) + Y
 
-        after = data['data']['after']
+        after = DATA['data']['after']
         if after:
             return count_words(subreddit, word_list, after, counts)
         else:
