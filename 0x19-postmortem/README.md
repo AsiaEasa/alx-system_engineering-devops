@@ -1,4 +1,4 @@
-![IMG_7265](https://github.com/AsiaEasa/alx-system_engineering-devops/assets/138696944/62d30722-6375-4e3b-b673-b74ab57214cf)
+Issue Summary:
 - Duration: The outage occurred from 8:00 AM to 12:00 PM (GMT).
 - Impact: The electronic library website experienced intermittent downtime, with users unable to access resources or perform searches. Approximately 75% of users were affected by the outage.
 - Root Cause: The root cause of the issue was identified as a distributed denial of service (DDoS) attack targeting the library's web servers.
