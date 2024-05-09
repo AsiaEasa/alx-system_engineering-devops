@@ -22,4 +22,7 @@ Corrective and Preventative Measures:
 - Tasks:
   - Conduct a thorough review of network infrastructure to identify potential vulnerabilities and weaknesses.
   - Implement rate limiting and traffic filtering rules to prevent future DDoS attacks.
-  - Train staff on DDoS attack detection and mitigation techniques to improve response times in the event of similar incidents. 
+  - Train staff on DDoS attack detection and mitigation techniques to improve response times in the event of similar incidents.
+ 
+  ![IMG_7265](https://github.com/AsiaEasa/alx-system_engineering-devops/assets/138696944/7ebe3c1d-722e-43ac-8cc9-0c2e2f4583da)
+
